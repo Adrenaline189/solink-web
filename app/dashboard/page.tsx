@@ -1,4 +1,6 @@
 "use client";
+import { Suspense } from 'react';
+export const dynamic = 'force-dynamic';
 
 import React, { useMemo, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -73,6 +75,8 @@ export default function Dashboard() {
   const nodeStatus = "● " + t(lang, "status.connected"); // mock: connected
 
   return (
+  <Suspense fallback={<div className="p-6 text-slate-400">Loading…</div>}>
+
     <div className="min-h-screen text-slate-100 p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -292,7 +296,9 @@ export default function Dashboard() {
         </footer>
       </div>
     </div>
-  );
+  
+  </Suspense>
+);
 }
 
 /** ----------------------------------------------------------------

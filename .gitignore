@@ -6,4 +6,3 @@ out/
 .env*
 .vercel/
 *.zip
-.vercel

@@ -1,4 +1,6 @@
 "use client";
+import { Suspense } from 'react';
+export const dynamic = 'force-dynamic';
 
 import Link from "next/link";
 import { useLang } from "@/lib/useLang";
@@ -25,6 +27,8 @@ export default function LandingPage() {
   const [lang] = useLang();
 
   return (
+  <Suspense fallback={<div className="p-6 text-slate-400">Loading…</div>}>
+
     <div className="bg-slate-950 text-slate-100">
       {/* HERO */}
       <section className="relative overflow-hidden">
@@ -147,7 +151,7 @@ export default function LandingPage() {
             <ul className="mt-3 grid grid-cols-2 gap-2 text-sm">
               {TOKEN_SPLIT.map((s) => (
                 <li key={s.name} className="flex items-center gap-2">
-                  <span className={`inline-block h-3 w-3 rounded-sm ${getBgColorClass(s.color)}`} />
+                  <span className="inline-block h-3 w-3 rounded-sm" style={{ background: s.color }} />
                   <span className="text-slate-300">{t(lang, `landing.token.${s.name.toLowerCase()}`)}</span>
                   <span className="ml-auto text-slate-400">{s.value}%</span>
                 </li>
@@ -213,7 +217,9 @@ export default function LandingPage() {
         </div>
       </footer>
     </div>
-  );
+  
+  </Suspense>
+);
 }
 
 /* ---------- Small subcomponents ---------- */
@@ -254,25 +260,4 @@ function FAQ({ q, a }: { q: string; a: string }) {
       <p className="mt-2 text-sm text-slate-400">{a}</p>
     </details>
   );
-}
-
-/**
- * Utility to map color hex to a CSS class.
- * You should define these classes in your CSS file.
- */
-function getBgColorClass(color: string): string {
-  switch (color) {
-    case "#22d3ee":
-      return "bg-token-private";
-    case "#6366f1":
-      return "bg-token-community";
-    case "#10b981":
-      return "bg-token-ecosystem";
-    case "#f59e0b":
-      return "bg-token-treasury";
-    case "#ef4444":
-      return "bg-token-team";
-    default:
-      return "";
-  }
 }
