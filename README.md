@@ -20,3 +20,4 @@ Type: CNAME   Name: www   Target: cname.vercel-dns.com
 Type: CNAME   Name: @     Target: cname.vercel-dns.com   # ใช้ CNAME flattening
 ```
 7) รอ DNS propagate แล้ว https จะขึ้นอัตโนมัติ
+# solink-web-v2
